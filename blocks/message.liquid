@@ -1,0 +1,33 @@
+{% doc %}
+  @example
+  {% content_for 'block', type: 'message', id: 'message' %}
+{% enddoc %}
+
+<p class="message">{{ block.settings.message }}</p>
+
+{% stylesheet %}
+  .message {
+    text-align: center;
+    width: 100%;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Announcement Message",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Announcement Message",
+      "default": "Here is an announcement message"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Message",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}
