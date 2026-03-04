@@ -1,0 +1,41 @@
+{% doc %}
+  @example
+  {% content_for 'block', type: 'announcement', id: 'announcement' %}
+{% enddoc %}
+
+<a class="announcement__link" href="{{ block.settings.link }}">{{ block.settings.announcement }}</a>
+
+{% stylesheet %}
+.announcement__link {
+  text-decoration: none;
+}
+.announcement__text {
+  text-align: center;
+  width: 100%;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Announcement",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "announcement",
+      "label": "Announcement Message",
+      "default": "<p><strong>BOGO 50% OFF Sale!</strong></p>"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement",
+      "category": "Header"
+    }
+  ]
+}
+{% endschema %}

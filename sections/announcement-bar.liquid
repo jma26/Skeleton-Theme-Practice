@@ -1,27 +1,60 @@
- <div class="announcement__bar full-width" style="background-color: {{ section.settings.background }}">
-  {% for block in section.blocks %}
-    {% render block %}
-  {% endfor %}
-</div>
+{% unless section.settings.show_announcement_bar == false %}
+  <div class="announcement__bar full-width" style="
+    --background-color: {{ section.settings.background_color }};
+    --text-color: {{ section.settings.text_color }};
+    --padding_scale: {{ section.settings.padding_scale }}rem
+  ">
+   {% for block in section.blocks %}
+     {% render block %} 
+   {% endfor %}
+ </div>
+{% endunless %}
 
 {% stylesheet %}
   .announcement__bar {
+    background-color: var(--background-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
+    padding: var(--padding_scale);
     width: 100%;
+  }
+  .announcement__bar .announcement__link {
+    color: inherit;
   }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Announcement Bar",
-  "blocks": [{ "type": "message" }],
+  "blocks": [{ "type": "announcement" }],
   "settings": [
     {
       "type": "color",
-      "id": "background",
+      "id": "background_color",
       "label": "Background color",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement_bar",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_scale",
+      "label": "Padding scale",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 1
     }
   ],
   "presets": [
